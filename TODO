@@ -1,0 +1,4 @@
+- do something better in 5.6.2 and 5.00504 than just skip Trig.t and pod*.t
+- rewrite Complex.t and Trig.t to use Test::More
+- possible to make Math::Complex and bignum (Math::BigFloat) to play well?
+

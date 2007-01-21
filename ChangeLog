@@ -1,3 +1,10 @@
+2007-01-21  Jarkko Hietaniemi  <jhi@iki.fi>
+
+	* great_circle_waypoint() was broken (the latitudes
+	  were garbage); report and fix by Uwe Girlich.
+	
+	* local()ize $! in the BEGIN block when looking for Inf.
+	
 2006-07-04  Jarkko Hietaniemi  <jhi@iki.fi>
 
 	* Move the pi-constants from Math::Trig to Math::Complex.

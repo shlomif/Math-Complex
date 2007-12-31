@@ -1,9 +1,20 @@
+2007-12-30  Jarkko Hietaniemi  <jhi@iki.fi>
+
+	* The example for great_circle_waypoint() had latitude and
+	  longitude switched; reported by Chris Heys.
+	
+	* Cosmetic changes in test files.
+	
+	* Release Math::Complex 1.38 + Math::Trig 1.05.
+	
 2007-01-21  Jarkko Hietaniemi  <jhi@iki.fi>
 
 	* great_circle_waypoint() was broken (the latitudes
 	  were garbage); report and fix by Uwe Girlich.
 	
 	* local()ize $! in the BEGIN block when looking for Inf.
+	
+	* Release Math::Complex 1.37.
 	
 2006-07-04  Jarkko Hietaniemi  <jhi@iki.fi>
 

@@ -1,3 +1,28 @@
+2008-01-06  Jarkko Hietaniemi  <jhi@iki.fi>
+
+	* Add the standard "same terms as Perl itself" license
+	  to both Complex.pm and Trig.pm.
+
+	* Add Inf() as an exportable sub, it returns the infinity
+	  (or the best floating double imitation of it).
+
+	* Make the BEGIN block of Complex.pm croak if it cannot
+	  find an infinity.  This may be deadly on some platforms
+	  but then again, Complex.pm has returned infinities for
+	  quite some time now.
+	
+	* tanh(a big enough number) was returning NaN in Unix and 1+NaN
+	  in Windows when the right answer is 1 (for IEEE doubles
+	  the limit seemed to be 709 vs 710).  Added tests for
+	  sinh/cosh/tanh/sech/csch for 100/-100, and for sinh/cosh
+	  with 1e4 returning Inf().  Reported by Roberto Congiu.
+
+	* Added sanity check tests to Trig.t for all the trigonometric
+	  and hyperbolic functions (staying in real axis, not going to
+	  complex plane).
+	
+	* Release Math::Complex 1.39 + Math::Trig 1.06.
+	
 2007-12-30  Jarkko Hietaniemi  <jhi@iki.fi>
 
 	* The example for great_circle_waypoint() had latitude and

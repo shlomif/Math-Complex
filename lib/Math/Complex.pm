@@ -1,4 +1,4 @@
-#
+
 # Complex numbers and associated mathematical functions
 # -- Raphael Manfredi	Since Sep 1996
 # -- Jarkko Hietaniemi	Since Mar 1997
@@ -9,7 +9,7 @@ package Math::Complex;
 
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS $Inf);
 
-$VERSION = 1.38;
+$VERSION = 1.39;
 
 BEGIN {
     unless ($^O eq 'unicosmk') {
@@ -28,7 +28,8 @@ EOE
 EOE
 	}
     }
-    $Inf = "Inf" if !defined $Inf || !($Inf > 0); # Desperation.
+    $Inf = eval "1+Inf" if !defined $Inf || !($Inf > 0); # Desperation.
+    die "Could not get Infinity" unless $Inf > 1e40;
 }
 
 use strict;
@@ -65,7 +66,7 @@ my @trig = qw(
 	     ),
 	   @trig);
 
-my @pi = qw(pi pi2 pi4 pip2 pip4);
+my @pi = qw(pi pi2 pi4 pip2 pip4 Inf);
 
 @EXPORT_OK = @pi;
 
@@ -109,8 +110,6 @@ my $eps            = 1e-14;		# Epsilon
 #	c_dirty		cartesian form not up-to-date
 #	p_dirty		polar form not up-to-date
 #	display		display format (package's global when not set)
-#	bn_cartesian
-#       bnc_dirty
 #
 
 # Die on bad *make() arguments.
@@ -858,7 +857,7 @@ sub cos {
 	my $ey = CORE::exp($y);
 	my $sx = CORE::sin($x);
 	my $cx = CORE::cos($x);
-	my $ey_1 = $ey ? 1 / $ey : $Inf;
+	my $ey_1 = $ey ? 1 / $ey : Inf();
 	return (ref $z)->make($cx * ($ey + $ey_1)/2,
 			      $sx * ($ey_1 - $ey)/2);
 }
@@ -875,7 +874,7 @@ sub sin {
 	my $ey = CORE::exp($y);
 	my $sx = CORE::sin($x);
 	my $cx = CORE::cos($x);
-	my $ey_1 = $ey ? 1 / $ey : $Inf;
+	my $ey_1 = $ey ? 1 / $ey : Inf();
 	return (ref $z)->make($sx * ($ey + $ey_1)/2,
 			      $cx * ($ey - $ey_1)/2);
 }
@@ -893,6 +892,18 @@ sub tan {
 }
 
 #
+# csc
+#
+# Computes the cosecant sec(z) = 1 / sin(z).
+#
+sub csc {
+	my ($z) = @_;
+	my $sz = &sin($z);
+	_divbyzero "csc($z)", "sin($z)" if ($sz == 0);
+	return 1 / $sz;
+}
+
+#
 # sec
 #
 # Computes the secant sec(z) = 1 / cos(z).
@@ -900,20 +911,8 @@ sub tan {
 sub sec {
 	my ($z) = @_;
 	my $cz = &cos($z);
-	_divbyzero "sec($z)", "cos($z)" if ($cz == 0);
+	_divbyzero "sec($z)", "cs($z)" if ($cz == 0);
 	return 1 / $cz;
-}
-
-#
-# csc
-#
-# Computes the cosecant csc(z) = 1 / sin(z).
-#
-sub csc {
-	my ($z) = @_;
-	my $sz = &sin($z);
-	_divbyzero "csc($z)", "sin($z)" if ($sz == 0);
-	return 1 / $sz;
 }
 
 #
@@ -1069,11 +1068,11 @@ sub cosh {
 	my $ex;
 	unless (ref $z) {
 	    $ex = CORE::exp($z);
-	    return $ex ? ($ex + 1/$ex)/2 : $Inf;
+	    return $ex ? ($ex + 1/$ex)/2 : Inf();
 	}
 	my ($x, $y) = @{$z->_cartesian};
 	$ex = CORE::exp($x);
-	my $ex_1 = $ex ? 1 / $ex : $Inf;
+	my $ex_1 = $ex ? 1 / $ex : Inf();
 	return (ref $z)->make(CORE::cos($y) * ($ex + $ex_1)/2,
 			      CORE::sin($y) * ($ex - $ex_1)/2);
 }
@@ -1089,13 +1088,13 @@ sub sinh {
 	unless (ref $z) {
 	    return 0 if $z == 0;
 	    $ex = CORE::exp($z);
-	    return $ex ? ($ex - 1/$ex)/2 : "-$Inf";
+	    return $ex ? ($ex - 1/$ex)/2 : -Inf();
 	}
 	my ($x, $y) = @{$z->_cartesian};
 	my $cy = CORE::cos($y);
 	my $sy = CORE::sin($y);
 	$ex = CORE::exp($x);
-	my $ex_1 = $ex ? 1 / $ex : $Inf;
+	my $ex_1 = $ex ? 1 / $ex : Inf();
 	return (ref $z)->make(CORE::cos($y) * ($ex - $ex_1)/2,
 			      CORE::sin($y) * ($ex + $ex_1)/2);
 }
@@ -1109,7 +1108,10 @@ sub tanh {
 	my ($z) = @_;
 	my $cz = cosh($z);
 	_divbyzero "tanh($z)", "cosh($z)" if ($cz == 0);
-	return sinh($z) / $cz;
+	my $sz = sinh($z);
+	return  1 if $cz ==  $sz;
+	return -1 if $cz == -$sz;
+	return $sz / $cz;
 }
 
 #
@@ -1152,7 +1154,10 @@ sub coth {
 	my ($z) = @_;
 	my $sz = sinh($z);
 	_divbyzero "coth($z)", "sinh($z)" if $sz == 0;
-	return cosh($z) / $sz;
+	my $cz = cosh($z);
+	return  1 if $cz ==  $sz;
+	return -1 if $cz == -$sz;
+	return $cz / $sz;
 }
 
 #
@@ -1488,6 +1493,10 @@ sub _stringify_polar {
 	return "[$r,$theta]";
 }
 
+sub Inf {
+    return $Inf;
+}
+
 1;
 __END__
 
@@ -1755,11 +1764,11 @@ The I<k>th root for C<z = [r,t]> is given by:
 You can return the I<k>th root directly by C<root(z, n, k)>,
 indexing starting from I<zero> and ending at I<n - 1>.
 
-The I<spaceship> comparison operator, E<lt>=E<gt>, is also defined. In
-order to ensure its restriction to real numbers is conform to what you
-would expect, the comparison is run on the real part of the complex
-number first, and imaginary parts are compared only when the real
-parts match.
+The I<spaceship> numeric comparison operator, E<lt>=E<gt>, is also
+defined. In order to ensure its restriction to real numbers is conform
+to what you would expect, the comparison is run on the real part of
+the complex number first, and imaginary parts are compared only when
+the real parts match.
 
 =head1 CREATION
 
@@ -1916,6 +1925,13 @@ exported:
     use Math::Complex ':pi'; 
     $third_of_circle = pi2 / 3;
 
+=head2 Inf
+
+The floating point infinity can be exported as a subroutine Inf():
+
+    use Math::Complex 'Inf'; 
+    my $AlsoInf = $Inf + 42;
+
 =head1 ERRORS DUE TO DIVISION BY ZERO OR LOGARITHM OF ZERO
 
 The division (/) and the following functions
@@ -1985,6 +2001,11 @@ Whatever it is, it does not manifest itself anywhere else where Perl runs.
 Daniel S. Lewart <F<lewart!at!uiuc.edu>>
 Jarkko Hietaniemi <F<jhi!at!iki.fi>>
 Raphael Manfredi <F<Raphael_Manfredi!at!pobox.com>>
+
+=head1 LICENSE
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself. 
 
 =cut
 

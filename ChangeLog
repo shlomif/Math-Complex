@@ -1,3 +1,20 @@
+2008-01-07  Jarkko Hietaniemi  <jhi@iki.fi>
+
+	* The infinity detection was wrong for Microsoft libc,
+	  there infinity is '1.#INF'.  Now made the detection
+	  hopefully much more robust.
+	
+	* Release Math::Complex 1.42 + Math::Trig 1.07.
+	
+2008-01-06  Jarkko Hietaniemi  <jhi@iki.fi>
+
+	* PAUSE upload had some issues which messed up 1.39 upload,
+	  reissue after reviewing (and fixing) the diffs.
+	
+	* Release Math::Complex 1.41 (1.40 skipped because
+	  of silly "1.4.tar.gz" feature) + Math::Trig 1.07.
+	  [deleted from CPAN because broken in Win32]
+	
 2008-01-06  Jarkko Hietaniemi  <jhi@iki.fi>
 
 	* Add the standard "same terms as Perl itself" license
@@ -22,6 +39,7 @@
 	  complex plane).
 	
 	* Release Math::Complex 1.39 + Math::Trig 1.06.
+	  [deleted from CPAN because of PAUSE upload problems]
 	
 2007-12-30  Jarkko Hietaniemi  <jhi@iki.fi>
 

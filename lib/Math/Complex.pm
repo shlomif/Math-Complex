@@ -1,4 +1,4 @@
-
+#
 # Complex numbers and associated mathematical functions
 # -- Raphael Manfredi	Since Sep 1996
 # -- Jarkko Hietaniemi	Since Mar 1997
@@ -9,27 +9,37 @@ package Math::Complex;
 
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS $Inf);
 
-$VERSION = 1.39;
+$VERSION = 1.42;
 
 BEGIN {
-    unless ($^O eq 'unicosmk') {
+    my $IEEE_DBL_MAX = eval "1.7976931348623157e+308";
+    if ($^O eq 'unicosmk') {
+	$Inf = $IEEE_DBL_MAX;
+    } else {
         local $!;
 	# We do want an arithmetic overflow, Inf INF inf Infinity:.
-        undef $Inf unless eval <<'EOE' and $Inf =~ /^inf(?:inity)?$/i;
-	  local $SIG{FPE} = sub {die};
-	  my $t = CORE::exp 30;
-	  $Inf = CORE::exp $t;
-EOE
-	if (!defined $Inf) {		# Try a different method
-	  undef $Inf unless eval <<'EOE' and $Inf =~ /^inf(?:inity)?$/i;
-	    local $SIG{FPE} = sub {die};
-	    my $t = 1;
-	    $Inf = $t + "1e99999999999999999999999999999999";
-EOE
+	for my $t (
+	    'exp(999)',
+	    '9**9**9',
+	    '1e999',
+	    'inf',
+	    'Inf',
+	    'INF',
+	    'infinity',
+	    'Infinity',
+	    'INFINITY',
+	    ) {
+	    local $SIG{FPE} = { };
+	    local $^W = 0;
+	    my $i = eval "$t+1.0";
+	    if ($i =~ /inf/i && $i > 1e+99) {
+		$Inf = $i;
+		last;
+	    }
 	}
+	$Inf = $IEEE_DBL_MAX unless defined $Inf;  # Oh well, close enough.
+	die "Could not get Infinity" unless $Inf > 1e99;
     }
-    $Inf = eval "1+Inf" if !defined $Inf || !($Inf > 0); # Desperation.
-    die "Could not get Infinity" unless $Inf > 1e40;
 }
 
 use strict;
@@ -892,18 +902,6 @@ sub tan {
 }
 
 #
-# csc
-#
-# Computes the cosecant sec(z) = 1 / sin(z).
-#
-sub csc {
-	my ($z) = @_;
-	my $sz = &sin($z);
-	_divbyzero "csc($z)", "sin($z)" if ($sz == 0);
-	return 1 / $sz;
-}
-
-#
 # sec
 #
 # Computes the secant sec(z) = 1 / cos(z).
@@ -911,8 +909,20 @@ sub csc {
 sub sec {
 	my ($z) = @_;
 	my $cz = &cos($z);
-	_divbyzero "sec($z)", "cs($z)" if ($cz == 0);
+	_divbyzero "sec($z)", "cos($z)" if ($cz == 0);
 	return 1 / $cz;
+}
+
+#
+# csc
+#
+# Computes the cosecant csc(z) = 1 / sin(z).
+#
+sub csc {
+	my ($z) = @_;
+	my $sz = &sin($z);
+	_divbyzero "csc($z)", "sin($z)" if ($sz == 0);
+	return 1 / $sz;
 }
 
 #
@@ -1929,8 +1939,20 @@ exported:
 
 The floating point infinity can be exported as a subroutine Inf():
 
-    use Math::Complex 'Inf'; 
-    my $AlsoInf = $Inf + 42;
+    use Math::Complex qw(Inf sinh);
+    my $AlsoInf = Inf() + 42;
+    my $AnotherInf = sinh(1e42);
+    print "$AlsoInf is $AnotherInf\n" if $AlsoInf == $AnotherInf;
+
+Note that the stringified form of infinity varies between platforms:
+it can be for example any of
+
+   inf
+   infinity
+   INF
+   1.#INF
+
+or it can be something else. 
 
 =head1 ERRORS DUE TO DIVISION BY ZERO OR LOGARITHM OF ZERO
 

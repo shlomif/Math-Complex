@@ -1,3 +1,12 @@
+2008-01-09  Jarkko Hietaniemi  <jhi@iki.fi>
+
+	* sinh(1e4) was not enough to go to infinity in AMD64
+	  with long doubles (sinh(1e5) was), and test.pl:is()
+	  didn't work for infinities (subtle overloading issue.)
+	  Fix from Nicholas Clark.
+	
+	* Release Math::Complex 1.43 + Math::Trig 1.08.
+	
 2008-01-07  Jarkko Hietaniemi  <jhi@iki.fi>
 
 	* The infinity detection was wrong for Microsoft libc,
@@ -170,7 +179,7 @@ after which Math::Complex and Math::Trig were CPANized as 1.36 and 1.04.
 	*.t files or the help files from under lib.
 	
 	TODO: some helper files still remain under t/ that could
-	follow their 'masters'.  UPDATE: On second thoughts, why
+	follow their 'masters'.	 UPDATE: On second thoughts, why
 	should they.  They can continue to live under t/lib, and
 	in fact the locale/strict/warnings helpers that were moved
 	could be moved back.  This way the amount of non-installable

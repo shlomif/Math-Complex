@@ -1,3 +1,17 @@
+2008-01-11  Jarkko Hietaniemi  <jhi@iki.fi>
+
+	* Address rt.cpan.org #27186: Shadowed By the Core Version
+	  by adding INSTALLDIRS => 'perl' to Makefile.PL.
+	
+	* Ignore SIGFPE in Trig.t when doing arithmetics with
+	  infinities (avoids a coredump in netbsd-alpha, found
+	  by David Cantrell).  Document this fun.
+
+	* Make Math::Complex and Math::Trig documentations to
+	  refer to each other.
+	
+	* Release Math::Complex 1.44 + Math::Trig 1.09.
+	
 2008-01-09  Jarkko Hietaniemi  <jhi@iki.fi>
 
 	* sinh(1e4) was not enough to go to infinity in AMD64

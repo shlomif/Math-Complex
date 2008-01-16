@@ -10,14 +10,14 @@ package Math::Trig;
 use 5.005;
 use strict;
 
-use Math::Complex 1.45;
+use Math::Complex 1.46;
 use Math::Complex qw(:trig :pi);
 
 use vars qw($VERSION $PACKAGE @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
 
 @ISA = qw(Exporter);
 
-$VERSION = 1.10;
+$VERSION = 1.11;
 
 my @angcnv = qw(rad2deg rad2grad
 		deg2rad deg2grad
@@ -681,19 +681,21 @@ about 0.55%, but generally below 0.3%.
 For small inputs asin() and acos() may return complex numbers even
 when real numbers would be enough and correct, this happens because of
 floating-point inaccuracies.  You can see these inaccuracies for
-example by trying this:
+example by trying theses:
 
-  print cos(1e-6)**2+sin(1e-6)
+  print cos(1e-6)**2+sin(1e-6)**2 - 1,"\n";
+  printf "%.20f", cos(1e-6)**2+sin(1e-6)**2,"\n";
 
 which will print something like this
 
-  1.000000999999
+  -1.11022302462516e-16
+  0.99999999999999988898
 
-even though the wanted result is of course exactly one.  The formulas
-used to compute asin() and acos() are quite sensitive to this, and
-therefore they might accidentally slip into the complex plane even
-when they should not.  To counter this there are two interfaces that
-are guaranteed to return a real-valued output.
+even though the expected results are of course exactly zero and one.
+The formulas used to compute asin() and acos() are quite sensitive to
+this, and therefore they might accidentally slip into the complex
+plane even when they should not.  To counter this there are two
+interfaces that are guaranteed to return a real-valued output.
 
 =over 4
 

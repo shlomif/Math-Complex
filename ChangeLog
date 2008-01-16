@@ -1,3 +1,10 @@
+2008-01-16  Jarkko Hietaniemi  <jhi@iki.fi>
+
+	* Fix a typo in the asin_real/acos_real documentation
+	  noticed by Alexej Sveshnikov.
+	
+	* Release Math::Complex 1.46 + Math::Trig 1.11.
+	
 2008-01-15  Jarkko Hietaniemi  <jhi@iki.fi>
 
 	* Address [rt.cpan.org #32291] Wrong (Math::Complex) results in great_circle family of functions

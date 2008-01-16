@@ -13,7 +13,7 @@ BEGIN {
     }
 }
 
-use Math::Complex 1.45;
+use Math::Complex 1.46;
 
 use vars qw($VERSION);
 

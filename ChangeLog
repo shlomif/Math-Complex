@@ -1,3 +1,15 @@
+2008-01-15  Jarkko Hietaniemi  <jhi@iki.fi>
+
+	* Address [rt.cpan.org #32291] Wrong (Math::Complex) results in great_circle family of functions
+	  Fix gratefully received from the reporter of the bug,
+	  Alexej Sveshnikov.
+
+	* Added the two new interfaces added by the fix for the
+	  rt.cpan.org #32291, asin_real() and acos_real(), also
+	  to the public interface.
+	
+	* Release Math::Complex 1.45 + Math::Trig 1.10.
+	
 2008-01-11  Jarkko Hietaniemi  <jhi@iki.fi>
 
 	* Address rt.cpan.org #27186: Shadowed By the Core Version

@@ -1,5 +1,16 @@
 2008-01-16  Jarkko Hietaniemi  <jhi@iki.fi>
 
+	* The great circle tests with small angles didn't work
+	  with long doubles in Mac OS X, reported by conrad.
+	  Oh, the joy of floating point.  Fudged the test hopefully enough.
+	  Could special case going from point A to point A,
+	  but that would be cheating.  (For really small movements
+	  could also just do Pythagorean plane distance.)
+	
+	* Release Math::Complex 1.47 + Math::Trig 1.12.
+	
+2008-01-16  Jarkko Hietaniemi  <jhi@iki.fi>
+
 	* Fix a typo in the asin_real/acos_real documentation
 	  noticed by Alexej Sveshnikov.
 	

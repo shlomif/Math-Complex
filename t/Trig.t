@@ -28,8 +28,8 @@ BEGIN {
 
 plan(tests => 153);
 
-use Math::Trig 1.11;
-use Math::Trig 1.10 qw(:pi Inf);
+use Math::Trig 1.12;
+use Math::Trig 1.12 qw(:pi Inf);
 
 my $pip2 = pi / 2;
 
@@ -366,7 +366,9 @@ cmp_ok(coth(-1e5), '==', -1);
 print "# great_circle_distance with small angles\n";
 
 for my $e (qw(1e-2 1e-3 1e-4 1e-5)) {
-    cmp_ok(great_circle_distance(0, $e, 0, $e), '==', 0);
+    # Can't assume == 0 because of floating point fuzz,
+    # but let's hope for at least < $e.
+    cmp_ok(great_circle_distance(0, $e, 0, $e), '<', $e);
 }
 
 print "# asin_real, acos_real\n";

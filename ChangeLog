@@ -1,3 +1,10 @@
+2008-01-29  Jarkko Hietaniemi  <jhi@iki.fi>
+
+	* In HP-UX the infinity is stringified as "++" and
+	  the negative infinity as "--", fix from H. Merijn Brand.
+	
+	* Release Math::Complex 1.48 + Math::Trig 1.13.
+	
 2008-01-16  Jarkko Hietaniemi  <jhi@iki.fi>
 
 	* The great circle tests with small angles didn't work

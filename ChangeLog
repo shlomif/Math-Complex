@@ -1,3 +1,14 @@
+2008-04-04  Jarkko Hietaniemi  <jhi@iki.fi>
+
+	* The debugging output in Complex.pm BEGIN was not nice:
+	  remove that, resolving rt.cpan.org #32919.
+
+	* Make the detecting of Infinity even more relaxed:
+	  just be happy with defined() and "big enough".
+	  (Switch the '1e999' as last resort, though.)
+	
+	* Release Math::Complex 1.49 + Math::Trig 1.14.
+	
 2008-01-29  Jarkko Hietaniemi  <jhi@iki.fi>
 
 	* In HP-UX the infinity is stringified as "++" and

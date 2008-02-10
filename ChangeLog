@@ -1,3 +1,12 @@
+2008-02-10  Jarkko Hietaniemi  <jhi@iki.fi>
+
+	* Make the nv max detection to work also with
+	  long doubles, reported by Nicholas Clark
+	  [core perl change #33268]
+
+	* Release Math::Complex 1.51 + Math::Trig 1.15.
+	  (1.50 skipped because of "1.5" idiocy.)
+	
 2008-04-04  Jarkko Hietaniemi  <jhi@iki.fi>
 
 	* The debugging output in Complex.pm BEGIN was not nice:

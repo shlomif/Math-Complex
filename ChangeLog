@@ -1,3 +1,9 @@
+2008-02-11  Jarkko Hietaniemi  <jhi@iki.fi>
+
+	* Duh. Forgot 128-bit option from the %DBL_MAX table.
+
+	* Release Math::Complex 1.52 + Math::Trig 1.16.
+	
 2008-02-10  Jarkko Hietaniemi  <jhi@iki.fi>
 
 	* Make the nv max detection to work also with

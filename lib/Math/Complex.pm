@@ -9,7 +9,7 @@ package Math::Complex;
 
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS $Inf);
 
-$VERSION = 1.52;
+$VERSION = 1.53;
 
 use Config;
 
@@ -1203,7 +1203,7 @@ sub cotanh { Math::Complex::coth(@_) }
 #
 # acosh
 #
-# Computes the arc hyperbolic cosine acosh(z) = log(z + sqrt(z*z-1)).
+# Computes the area/inverse hyperbolic cosine acosh(z) = log(z + sqrt(z*z-1)).
 #
 sub acosh {
 	my ($z) = @_;
@@ -1231,7 +1231,7 @@ sub acosh {
 #
 # asinh
 #
-# Computes the arc hyperbolic sine asinh(z) = log(z + sqrt(z*z+1))
+# Computes the area/inverse hyperbolic sine asinh(z) = log(z + sqrt(z*z+1))
 #
 sub asinh {
 	my ($z) = @_;
@@ -1251,7 +1251,7 @@ sub asinh {
 #
 # atanh
 #
-# Computes the arc hyperbolic tangent atanh(z) = 1/2 log((1+z) / (1-z)).
+# Computes the area/inverse hyperbolic tangent atanh(z) = 1/2 log((1+z) / (1-z)).
 #
 sub atanh {
 	my ($z) = @_;
@@ -1267,7 +1267,7 @@ sub atanh {
 #
 # asech
 #
-# Computes the hyperbolic arc secant asech(z) = acosh(1 / z).
+# Computes the area/inverse hyperbolic secant asech(z) = acosh(1 / z).
 #
 sub asech {
 	my ($z) = @_;
@@ -1278,7 +1278,7 @@ sub asech {
 #
 # acsch
 #
-# Computes the hyperbolic arc cosecant acsch(z) = asinh(1 / z).
+# Computes the area/inverse hyperbolic cosecant acsch(z) = asinh(1 / z).
 #
 sub acsch {
 	my ($z) = @_;
@@ -1296,7 +1296,7 @@ sub acosech { Math::Complex::acsch(@_) }
 #
 # acoth
 #
-# Computes the arc hyperbolic cotangent acoth(z) = 1/2 log((1+z) / (z-1)).
+# Computes the area/inverse hyperbolic cotangent acoth(z) = 1/2 log((1+z) / (z-1)).
 #
 sub acoth {
 	my ($z) = @_;

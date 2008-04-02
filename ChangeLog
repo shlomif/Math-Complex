@@ -1,3 +1,21 @@
+2008-04-01  Jarkko Hietaniemi  <jhi@iki.fi>
+
+	* Resolved rt.cpan.org report:
+	  "#34605: Math::Trig(3pm) man page feedback"
+	  (Trig.pm talked of "arcus hyperbolic sine", which is wrong,
+	   it is either "area hyperbolic sine" or "inverse hyperbolic sine")
+
+	* Tweaked also the code comments a bit to speak consistently of
+	  "area/inverse hyperbolic ..."
+
+	* Resolved rt.cpan.org report:
+	  "#34269: Math::Trig::great_circle_destination"
+	  (One cannot combine the results great_circle_distance(A, B) and
+	   great_circle_direction(A, B) to get great_circle_destination(A, ...)
+	   to return B, because the bearing keeps changing in the general case)
+	
+	* Release Math::Complex 1.53 + Math::Trig 1.17.
+	
 2008-02-11  Jarkko Hietaniemi  <jhi@iki.fi>
 
 	* Duh. Forgot 128-bit option from the %DBL_MAX table.

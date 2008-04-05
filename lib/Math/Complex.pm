@@ -7,9 +7,9 @@
 
 package Math::Complex;
 
-use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS $Inf);
+use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS $Inf $ExpInf);
 
-$VERSION = 1.53;
+$VERSION = 1.54;
 
 use Config;
 
@@ -38,6 +38,7 @@ BEGIN {
     if ($^O eq 'unicosmk') {
 	$Inf = $DBL_MAX;
     } else {
+	local $SIG{FPE} = { };
         local $!;
 	# We do want an arithmetic overflow, Inf INF inf Infinity.
 	for my $t (
@@ -50,7 +51,6 @@ BEGIN {
 	    'INFINITY',
 	    '1e99999',
 	    ) {
-	    local $SIG{FPE} = { };
 	    local $^W = 0;
 	    my $i = eval "$t+1.0";
 	    if (defined $i && $i > $BIGGER_THAN_THIS) {
@@ -61,6 +61,7 @@ BEGIN {
 	$Inf = $DBL_MAX unless defined $Inf;  # Oh well, close enough.
 	die "Math::Complex: Could not get Infinity"
 	    unless $Inf > $BIGGER_THAN_THIS;
+	$ExpInf = exp(99999);
     }
     # print "# On this machine, Inf = '$Inf'\n";
 }
@@ -1101,7 +1102,7 @@ sub cosh {
 	my $ex;
 	unless (ref $z) {
 	    $ex = CORE::exp($z);
-	    return $ex ? ($ex + 1/$ex)/2 : Inf();
+            return $ex ? ($ex == $ExpInf ? Inf() : ($ex + 1/$ex)/2) : Inf();
 	}
 	my ($x, $y) = @{$z->_cartesian};
 	$ex = CORE::exp($x);
@@ -1121,7 +1122,7 @@ sub sinh {
 	unless (ref $z) {
 	    return 0 if $z == 0;
 	    $ex = CORE::exp($z);
-	    return $ex ? ($ex - 1/$ex)/2 : -Inf();
+            return $ex ? ($ex == $ExpInf ? Inf() : ($ex - 1/$ex)/2) : -Inf();
 	}
 	my ($x, $y) = @{$z->_cartesian};
 	my $cy = CORE::cos($y);

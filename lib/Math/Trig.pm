@@ -10,14 +10,14 @@ package Math::Trig;
 use 5.005;
 use strict;
 
-use Math::Complex 1.53;
+use Math::Complex 1.54;
 use Math::Complex qw(:trig :pi);
 
 use vars qw($VERSION $PACKAGE @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
 
 @ISA = qw(Exporter);
 
-$VERSION = 1.17;
+$VERSION = 1.18;
 
 my @angcnv = qw(rad2deg rad2grad
 		deg2rad deg2grad

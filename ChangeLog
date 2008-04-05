@@ -1,3 +1,17 @@
+2008-04-04  Jarkko Hietaniemi  <jhi@iki.fi>
+
+	* The SIGFPE catcher in Complex.pm and Trig.t was { }, not sub { }.
+
+	* Shuffle the Inf-guessing guesses a bit to try infinities first,
+	  and also 2**99999 before exp(99999), seems to be more reliable
+	  for generating the infinity for some odd reason (the ** is
+	  implemented via exp() anyway?)
+	
+	* In cosh() and sinh() more robustly produce Inf() when needed,
+	  even when exp() seems to "stick" into DBL_MAX and not go to Inf.
+	
+	* Release Math::Complex 1.54 + Math::Trig 1.18.
+	
 2008-04-01  Jarkko Hietaniemi  <jhi@iki.fi>
 
 	* Resolved rt.cpan.org report:

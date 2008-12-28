@@ -1,3 +1,12 @@
+2008-12-27  Jarkko Hietaniemi  <jhi@iki.fi>
+
+	* Resolve rt.cpan.org report: 
+ 	  "#39045: great_circle_direction gives wrong answer if 5th argument is supplied"
+	  by calling great_circle_distance() with an explicit argument
+	  list in great_circle_direction().
+	
+	* Release Math::Complex 1.55 + Math::Trig 1.19.
+	
 2008-04-04  Jarkko Hietaniemi  <jhi@iki.fi>
 
 	* The SIGFPE catcher in Complex.pm and Trig.t was { }, not sub { }.

@@ -7,5 +7,6 @@ t/Complex.t
 t/Trig.t
 t/pod.t
 t/pod-coverage.t
+t/underbar.t
 TODO
 META.yml                                 Module meta-data (added by MakeMaker)

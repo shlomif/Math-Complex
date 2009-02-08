@@ -12,6 +12,9 @@ WriteMakefile(
 	      INSTALLDIRS     => 'perl',
 	      PREREQ_PM	      =>
 	      	{
-#		    'Test::More'	=> 0, # One day...
+		    'Test::More'	=> 0,
+		    'Scalar::Util'	=> '1.11',
 		},
+              ($ExtUtils::MakeMaker::VERSION >= 6.3002 ?
+	       ('LICENSE'=> 'perl', ) : ()),
 	     );

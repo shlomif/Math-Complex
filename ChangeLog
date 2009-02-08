@@ -1,3 +1,10 @@
+2009-02-08  Jarkko Hietaniemi  <jhi@iki.fi>
+
+	* Fix qw(abs cos exp log sin sqrt) without argument, problem
+	  found by Steffen Mueller, 5.10-aware (lexical $_) fix by Abigail.
+	
+	* Release Math::Complex 1.56 + Math::Trig 1.20.
+	
 2008-12-27  Jarkko Hietaniemi  <jhi@iki.fi>
 
 	* Resolve rt.cpan.org report: 

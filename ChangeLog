@@ -1,3 +1,17 @@
+2011-05-03  Zefram  <zefram@fysh.org>
+
+	* Add copy constructor and arrange for it to be called
+	  appropriately, problem found by David Madore and Alexandr
+	  Ciornii.
+
+	* Correctly format polarwise when a numeric format specifier is
+	  given, problem found by TomC.
+
+	* More stable great_circle_direction algorithm, problem found
+	  by Daniel Burr.
+
+	* Release Math::Complex 1.57 + Math::Trig 1.21.
+
 2009-02-08  Jarkko Hietaniemi  <jhi@iki.fi>
 
 	* Fix qw(abs cos exp log sin sqrt) without argument, problem

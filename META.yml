@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Math-Complex
-version:            1.57
+version:            1.58
 abstract:           ~
 author:  []
 license:            perl
@@ -10,13 +10,19 @@ configure_requires:
 build_requires:
     ExtUtils::MakeMaker:  0
 requires:
-    Scalar::Util:  1.11
-    Test::More:    0
+    Config:               0
+    Exporter:             0
+    ExtUtils::MakeMaker:  0
+    overload:             0
+    Scalar::Util:         1.11
+    strict:               0
+    Test::More:           0
+    warnings:             0
 no_index:
     directory:
         - t
         - inc
-generated_by:       ExtUtils::MakeMaker version 6.56
+generated_by:       ExtUtils::MakeMaker version 6.57_05
 meta-spec:
     url:      http://module-build.sourceforge.net/META-spec-v1.4.html
     version:  1.4

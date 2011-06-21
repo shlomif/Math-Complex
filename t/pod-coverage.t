@@ -1,12 +1,4 @@
-BEGIN {
-    eval { require Test::More };
-    if ($@) {
-	print "1..0 # No Test::More, skipping\n";
-	exit(0);
-    } else {
-	import Test::More;
-    }
-}
+use Test::More;
 eval "use Test::Pod::Coverage 1.00";
 plan(skip_all => "Test::Pod::Coverage 1.00 required for testing POD coverage") if $@;
 plan(tests => 2);

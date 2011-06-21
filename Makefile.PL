@@ -1,10 +1,6 @@
+{ use 5.006; }
+
 use ExtUtils::MakeMaker;
-
-require 5.005;
-
-use Getopt::Long;
-
-my $renum;
 
 WriteMakefile(
 	      NAME            => 'Math::Complex',
@@ -12,8 +8,14 @@ WriteMakefile(
 	      INSTALLDIRS     => 'perl',
 	      PREREQ_PM	      =>
 	      	{
-		    'Test::More'	=> 0,
+		    'Config'		=> 0,
+		    'Exporter'		=> 0,
+		    'ExtUtils::MakeMaker' => 0,
 		    'Scalar::Util'	=> '1.11',
+		    'Test::More'	=> 0,
+		    'overload'		=> 0,
+		    'strict'		=> 0,
+		    'warnings'		=> 0,
 		},
               ($ExtUtils::MakeMaker::VERSION >= 6.3002 ?
 	       ('LICENSE'=> 'perl', ) : ()),

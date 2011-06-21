@@ -1,3 +1,20 @@
+2011-06-21  Zefram  <zefram@fysh.org>
+
+	* Declare package variables with "our" rather than "use vars".
+
+	* Corresponding to "our" usage, check for minimum Perl version
+	  5.006.
+
+	* Remove $ENV{PERL_CORE} logic from test suite, which is no
+	  longer desired in the core.
+
+	* In test suite, remove obsolete and now-incomplete handling of
+	  unavailability of Test::More.
+
+	* Declare module dependencies.
+
+	* Release Math::Complex 1.58 + Math::Trig 1.22.
+
 2011-05-03  Zefram  <zefram@fysh.org>
 
 	* Add copy constructor and arrange for it to be called
@@ -22,7 +39,7 @@
 2008-12-27  Jarkko Hietaniemi  <jhi@iki.fi>
 
 	* Resolve rt.cpan.org report: 
- 	  "#39045: great_circle_direction gives wrong answer if 5th argument is supplied"
+	  "#39045: great_circle_direction gives wrong answer if 5th argument is supplied"
 	  by calling great_circle_distance() with an explicit argument
 	  list in great_circle_direction().
 	

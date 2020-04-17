@@ -612,10 +612,11 @@ or the midpoint if you know the end points:
 
   use Math::Trig 'great_circle_midpoint';
 
-  ($thetam, $phim) =
+  my ($theta_mid, $phi_mid) =
     great_circle_midpoint($theta0, $phi0, $theta1, $phi1);
 
 The great_circle_midpoint() is just a special case of
+C<great_circle_waypoint> with $way = 0.5 .
 
 =head2 great_circle_waypoint
 

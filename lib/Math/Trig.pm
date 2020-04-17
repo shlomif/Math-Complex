@@ -697,11 +697,12 @@ about 0.55%, but generally below 0.3%.
 
 For small inputs asin() and acos() may return complex numbers even
 when real numbers would be enough and correct, this happens because of
-floating-point inaccuracies.  You can see these inaccuracies for
-example by trying theses:
+floating-point inaccuracies.  You can see the inaccuracies that
+cause these symptoms in sin() and cos() (asin() and acos() inverse
+functions) by trying these:
 
   print cos(1e-6)**2+sin(1e-6)**2 - 1,"\n";
-  printf "%.20f", cos(1e-6)**2+sin(1e-6)**2,"\n";
+  printf "%.20f\n", (cos(1e-6)**2+sin(1e-6)**2);
 
 which will print something like this
 

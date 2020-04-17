@@ -657,9 +657,10 @@ To calculate the distance between London (51.3N 0.5W) and Tokyo
 The direction you would have to go from London to Tokyo (in radians,
 straight north being zero, straight east being pi/2).
 
-    use Math::Trig qw(great_circle_direction);
+    use Math::Trig qw(great_circle_direction rad2deg);
 
     my $rad = great_circle_direction(@L, @T); # About 0.547 or 0.174 pi.
+    my $deg = rad2deg($rad); # 31.32 degrees east of north
 
 The midpoint between London and Tokyo being
 

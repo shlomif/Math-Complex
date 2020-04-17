@@ -1586,6 +1586,11 @@ Math::Complex - complex numbers and associated mathematical functions
 	$t = 4 - 3*i + $z;
 	$j = cplxe(1, 2*pi/3);
 
+    # Import constants pi, pi2 (= 2*pi), pi4 (= 4*pi),
+    #   pip2 (= pi/2), pip4 (= pi/4)
+    # See: https://en.wikipedia.org/wiki/Pi
+    use Math::Complex ':pi';
+
 =head1 DESCRIPTION
 
 This package lets you create and manipulate complex numbers. By default,
